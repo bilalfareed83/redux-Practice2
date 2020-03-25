@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux'
+// import TodoAction from './Action/actionTodo';
+import TodoMiddleware from './Middleware/todoMiddleware';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App = (props) => {
+  console.log(props)
+  
+     return (
+       <div className="App">
+         <h1>Hello World</h1>
+       </div>
+     )
+   }
+  
+    
+
+
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+    todos: state.TodoReducer.todos
+  }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getTodo: (data)=>{dispatch(TodoMiddleware.getTodo(data))}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
